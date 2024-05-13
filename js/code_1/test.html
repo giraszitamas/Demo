@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Példa</title>
+		<script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+		<script>
+			const web3 = new Web3('http://127.0.0.1:7545');
+
+			const sender = '0xe84fFb37f6e05898E0B28d938673092eab8699CE';
+			const privateKey = '0xf6a822999adb557e387c53a8ac65aaa403d0c577b08a5889969db3e9906dedfa';
+
+			const receiver = '0x08aD02A5122Caa4D0b8c9aDCee682C06742Ead54';
+
+			const amount = web3.utils.toWei("1", 'ether');
+
+			const transaction = {
+			  to: receiver,
+			  value: amount,
+			  gas: 2000000, 
+			  gasPrice: web3.utils.toWei("50", 'gwei')
+			};
+
+			web3.eth.accounts.signTransaction(transaction, privateKey)
+			  .then(signedTx => web3.eth.sendSignedTransaction(signedTx.rawTransaction))
+			  .then(receipt => console.log('Transaction receipt:', receipt))
+			  .catch(err => console.error(err));
+		</script>
+	</head>
+		<body>
+			Példa
+		</body>
+</html>
